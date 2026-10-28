@@ -13,14 +13,14 @@ export default defineConfig({
     timezoneId: 'America/Lima',
     locale: 'es-PE',
     reducedMotion: 'reduce',
-    launchOptions: { executablePath: '/usr/bin/chromium', args: ['--no-sandbox'] },
+    launchOptions: { executablePath: process.env.PLAYWRIGHT_USE_BUNDLED_CHROMIUM === 'true' ? undefined : '/usr/bin/chromium', args: ['--no-sandbox'] },
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
   },
   webServer: {
     command: 'npm run dev',
     url: 'http://127.0.0.1:5173',
-    reuseExistingServer: true,
+    reuseExistingServer: !process.env.CI,
     timeout: 20_000,
   },
 });

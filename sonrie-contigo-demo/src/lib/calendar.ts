@@ -1,7 +1,7 @@
 import type { Appointment } from './booking';
 
 export const CALENDAR_TITLE = 'DEMO — cita de prueba, no válida para atención';
-const DEMO_DESCRIPTION = 'Propuesta privada no oficial. Evento sintético; no válida para atención. No se envían invitaciones ni recordatorios. Al reprogramar o cancelar, actualiza o elimina manualmente este evento personal.';
+const DEMO_DESCRIPTION = 'Propuesta de demostración no oficial. Evento sintético; no válida para atención. No se envían invitaciones ni recordatorios. Al reprogramar o cancelar, actualiza o elimina manualmente este evento personal.';
 
 function utcStamp(value: Date | string): string {
   const date = value instanceof Date ? value : new Date(value);

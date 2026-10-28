@@ -1,6 +1,14 @@
 # Propuesta para Sonríe Contigo
 
-Demo local no oficial: cuatro sedes del encargo, reserva sintética y recepción sobre el mismo repositorio de sesión. Sin pacientes reales, cuentas, pagos ni comunicaciones. No se ha publicado ni desplegado.
+Demo no oficial: cuatro sedes del encargo, reserva sintética y recepción sobre el mismo repositorio de sesión. Sin pacientes reales, cuentas, pagos ni comunicaciones. El usuario autorizó expresamente la publicación pública en GitHub Pages el 28 de octubre de 2026. Código subido a `reyhs1/clientes-sitios-web-`, rama `main`; activación del sitio y primer despliegue pendientes de comprobación.
+
+## Publicación automática con enlace estable
+
+El workflow `../.github/workflows/demo-pages.yml` valida tipos, lint, pruebas unitarias y recorridos E2E antes de compilar y desplegar únicamente `dist`. Cada push a `main` que afecte a la demo actualiza el mismo sitio; no depende de mantener Vite ni la computadora encendida. Las acciones oficiales se fijan por SHA y solo el job de despliegue recibe permisos Pages/OIDC.
+
+Activación inicial del administrador del repositorio: **Settings → Pages → Build and deployment → Source: GitHub Actions**. Si la primera ejecución falló antes de activar Pages, abrir **Actions → Validate and deploy the demo → Run workflow → main**. No hay que crear otro workflow ni proporcionar un token en el código. GitHub mostrará la URL efectiva del despliegue en el entorno `github-pages`.
+
+La compilación utiliza `--base=/clientes-sitios-web-/`; las rutas internas usan hash. GitHub Pages público no tiene autenticación: la banda DEMO y `noindex` son avisos, no controles de acceso. No se añade dominio propio ni se cambia la visibilidad del repositorio. La disponibilidad depende de que GitHub Pages y el repositorio permanezcan habilitados.
 
 ## Ejecutar
 
@@ -42,6 +50,6 @@ npm run build
 npm run test:e2e
 ```
 
-Playwright Test utiliza el Chromium ya instalado en `/usr/bin/chromium`, sin descargar otro navegador. Inicia Vite automáticamente si no está ejecutándose. Los tests usan reloj fijo, bloquean peticiones externas, comprueban consola, el recorrido de reserva/recepción, conflictos, calendario descargado y zonas horarias; generan capturas en `test-results/` para 390, 768 y 1440 px. También revisan 320 px, teclado, foco, movimiento reducido y emulación de ampliación de texto al 200 %. Axe detecta una parte de los problemas de accesibilidad; no certifica accesibilidad completa. No se mide ni se afirma una puntuación Lighthouse.
+Localmente, Playwright Test utiliza el Chromium ya instalado en `/usr/bin/chromium`, sin descargar otro navegador. En GitHub Actions se instala el Chromium oficial de Playwright que falta en el runner y se selecciona con `PLAYWRIGHT_USE_BUNDLED_CHROMIUM=true`. Los tests inician Vite si no está ejecutándose. Usan reloj fijo, bloquean peticiones externas, comprueban consola, el recorrido de reserva/recepción, conflictos, calendario descargado y zonas horarias; generan capturas en `test-results/` para 390, 768 y 1440 px. También revisan 320 px, teclado, foco, movimiento reducido y emulación de ampliación de texto al 200 %. Axe detecta una parte de los problemas de accesibilidad; no certifica accesibilidad completa. No se mide ni se afirma una puntuación Lighthouse.
 
 Fuentes, intentos bloqueados, materiales, herramientas y resultados: [docs/SOURCES.md](docs/SOURCES.md). Los nombres de negocio/sedes proceden del encargo; reverificación independiente pendiente por rechazo 403 del proxy. No se inventan direcciones ni teléfonos.
