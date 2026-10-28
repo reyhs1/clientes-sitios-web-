@@ -1,12 +1,14 @@
 # Propuesta para Sonríe Contigo
 
-Demo no oficial: cuatro sedes del encargo, reserva sintética y recepción sobre el mismo repositorio de sesión. Sin pacientes reales, cuentas, pagos ni comunicaciones. El usuario autorizó expresamente la publicación pública en GitHub Pages el 28 de octubre de 2026. Código subido a `reyhs1/clientes-sitios-web-`, rama `main`; activación del sitio y primer despliegue pendientes de comprobación.
+Demo no oficial: cuatro sedes del encargo, reserva sintética y recepción sobre el mismo repositorio de sesión. Sin pacientes reales, cuentas, pagos ni comunicaciones. El usuario autorizó expresamente la publicación pública en GitHub Pages el 28 de octubre de 2026. Código en `reyhs1/clientes-sitios-web-`, rama `main`.
+
+**[Abrir la demo publicada](https://reyhs1.github.io/clientes-sitios-web-/)** · Despliegue confirmado por GitHub en [la ejecución 40790359136](https://github.com/reyhs1/clientes-sitios-web-/actions/runs/40790359136), con validación, E2E y publicación aprobados. La carga directa del dominio desde Codex sigue bloqueada por el proxy; la URL se obtuvo del enlace efectivo del propio despliegue.
 
 ## Publicación automática con enlace estable
 
 El workflow `../.github/workflows/demo-pages.yml` valida tipos, lint, pruebas unitarias y recorridos E2E antes de compilar y desplegar únicamente `dist`. Cada push a `main` que afecte a la demo actualiza el mismo sitio; no depende de mantener Vite ni la computadora encendida. Las acciones oficiales se fijan por SHA y solo el job de despliegue recibe permisos Pages/OIDC.
 
-Activación inicial del administrador del repositorio: **Settings → Pages → Build and deployment → Source: GitHub Actions**. Si la primera ejecución falló antes de activar Pages, abrir **Actions → Validate and deploy the demo → Run workflow → main**. No hay que crear otro workflow ni proporcionar un token en el código. GitHub mostrará la URL efectiva del despliegue en el entorno `github-pages`.
+La activación inicial ya se realizó: **Settings → Pages → Build and deployment → Source: GitHub Actions**. Para repetir una publicación manualmente, abrir **Actions → Validate and deploy the demo → Run workflow → main**. No hay que crear otro workflow ni proporcionar un token en el código. GitHub muestra la URL efectiva del despliegue en el entorno `github-pages`.
 
 La compilación utiliza `--base=/clientes-sitios-web-/`; las rutas internas usan hash. GitHub Pages público no tiene autenticación: la banda DEMO y `noindex` son avisos, no controles de acceso. No se añade dominio propio ni se cambia la visibilidad del repositorio. La disponibilidad depende de que GitHub Pages y el repositorio permanezcan habilitados.
 
